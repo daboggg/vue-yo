@@ -1,5 +1,5 @@
 <template>
-  <form class="card auth-card" @click.prevent="submitHandler">
+  <form class="card auth-card">
     <div class="card-content">
       <span class="card-title">Домашняя бухгалтерия</span>
       <div class="input-field">
@@ -50,6 +50,7 @@
         <button
           class="btn waves-effect waves-light auth-submit"
           type="submit"
+          @click.prevent="submitHandler"
         >
           Войти
           <i class="material-icons right">send</i>
@@ -66,6 +67,7 @@
 
 <script>
 import { email, required, minLength } from 'vuelidate/lib/validators'
+import messages from '../utils/messages'
 export default {
   name: 'Login',
   data: () => ({
@@ -75,6 +77,11 @@ export default {
   validations: {
     email: { email, required },
     password: { required, minLength: minLength(6) }
+  },
+  mounted () {
+    if (messages[this.$route.query.message]) {
+      this.$message(messages[this.$route.query.message])
+    }
   },
   methods: {
     submitHandler () {

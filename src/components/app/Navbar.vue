@@ -60,7 +60,7 @@ export default {
   methods: {
     logout () {
       console.log('logout')
-      this.$router.push('/logout?message=logout')
+      this.$router.push('/login?message=logout')
     }
   },
   beforeDestroy () {
